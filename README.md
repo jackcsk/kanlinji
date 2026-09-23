@@ -14,14 +14,14 @@
 
 ## 授權與字庫來源
 
-**本專案原創程式碼與文件採 [MIT License](LICENSE-MIT)，Copyright (c) 2026 Jack Cheung。** 預設下載包及 Docker 映像只隨附社群筆順與文楷字型；它們各自保留原授權，不適用 MIT。教育部原圖未隨附，選用安裝後須遵守非商業、署名及禁止改作條件。詳見[完整授權範圍](LICENSE)。
+**本專案原創程式碼與文件採 [MIT License](LICENSE-MIT)，Copyright (c) 2026 Jack Cheung。** 預設下載包及 Docker 映像只隨附社群筆順與文楷字型；它們各自保留原授權，不適用 MIT。教育部原圖未隨附，另行安裝後須遵守非商業、署名及禁止改作條件。詳見[完整授權範圍](LICENSE)。
 
 | 專案檔案 | 來源 | 適用授權 |
 | --- | --- | --- |
 | [台灣筆順資料](data/tw.json.gz)、[AnimCJK 衍生字型](public/fonts/AnimCJKWorksheet.otf) | [AnimCJK 繁體字形，固定版本](https://github.com/parsimonhi/animCJK/blob/ec5e17cca76c87587790bcbce5ea0b4d4fb753d6/graphicsZhHant.txt) | [Arphic Public License](public/licenses/ARPHICPL.txt)；[上游說明](https://github.com/parsimonhi/animCJK/blob/ec5e17cca76c87587790bcbce5ea0b4d4fb753d6/licenses/COPYING.txt) |
 | [中國大陸筆順資料](data/cn.json.gz) | [Hanzi Writer Data](https://github.com/chanind/hanzi-writer-data) 2.0.1，源自 [Make Me a Hanzi](https://github.com/skishore/makemeahanzi) | [Arphic Public License](public/licenses/ARPHICPL.txt)；[上游說明](https://github.com/chanind/hanzi-writer-data#license) |
 | [內建文楷字型](public/fonts/WorksheetKai.ttf) | [LXGW WenKai TC Regular，固定版本](https://github.com/lxgw/LxgwWenKaiTC/blob/55e77118285a064250abd0324da312223806368a/fonts/TTF/LXGWWenKaiTC-Regular.ttf) | [SIL Open Font License 1.1](public/licenses/LXGW-OFL.txt) |
-| 教育部全筆順原圖資料（選用，未隨附） | [中華民國教育部《國字標準字體筆順學習網》](https://stroke-order.learningweb.moe.edu.tw/resource.jsp?ID=1) | [CC BY-NC-ND 3.0 TW](https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52)，非商業、署名、禁止改作；[資料聲明](public/licenses/MOE-NOTICE.txt) |
+| 教育部全筆順原圖資料（可選，未隨附） | [中華民國教育部《國字標準字體筆順學習網》](https://stroke-order.learningweb.moe.edu.tw/resource.jsp?ID=1) | [CC BY-NC-ND 3.0 TW](https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52)，非商業、署名、禁止改作；[資料聲明](public/licenses/MOE-NOTICE.txt) |
 
 完整來源、版本和修改紀錄見[第三方資料聲明](public/licenses/NOTICE.txt)。上述授權範圍依各上游的授權聲明整理；教育部原圖的具體使用情況仍須遵守其[官方版權說明](https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52)。
 
@@ -65,13 +65,13 @@ docker build -t kanlinji .
 docker run --rm --init -p 3000:3000 --read-only kanlinji
 ```
 
-映像使用 `node:24-alpine`，建置階段執行測試，執行階段採用非 root 的 `node` 使用者。Compose 包含唯讀檔案系統、健康檢查與重新啟動設定。預設不需掛載磁碟或設定資料庫；教育部原圖檔也不會進入 Docker 建置內容。首次建置需下載 Node 基底映像；完成建置後網站及隨附字庫可以在無外網環境執行。選用教育部原圖時，按下方[安裝步驟](#選用安裝台灣教育部原圖)以唯讀方式掛載本機資料。
+映像使用 `node:24-alpine`，建置階段執行測試，執行階段採用非 root 的 `node` 使用者。Compose 包含唯讀檔案系統、健康檢查與重新啟動設定。預設不需掛載磁碟或設定資料庫；教育部原圖檔也不會進入 Docker 建置內容。首次建置需下載 Node 基底映像；完成建置後網站及隨附字庫可以在無外網環境執行。如要使用教育部原圖，按下方[安裝步驟](#可選安裝台灣教育部原圖)以唯讀方式掛載本機資料。
 
 ## 功能
 
 | 類別 | 功能 |
 | --- | --- |
-| 練習模式 | 原有 12 種：整行、半行、加空行、筆順組合、多詞、多句、文章等；另加選用的「台灣教育部・原版筆順＋練習格」 |
+| 練習模式 | 原有 12 種：整行、半行、加空行、筆順組合、多詞、多句、文章等；另有可選的「台灣教育部・原版筆順＋練習格」 |
 | 教育部資料與線上查詢 | 額外安裝教育部資料後，可離線使用 6,063 字原版全筆順提示；台灣線上動畫與香港教育局逐字查詢無需安裝這份資料，但須連線至來源網站 |
 | 格線 | 田字格、米字格、米字回宮格、回宮格、方格、九宮格、中蛋田字格、蛋格、中心格、無格，共 10 種 |
 | 紙張 | A4、Letter、直向／橫向、自動分頁、12–28 mm 格子、尾頁填滿空格 |
@@ -103,7 +103,7 @@ docker run --rm --init -p 3000:3000 --read-only kanlinji
 | 地區 | 內建資料 | 字數 | 限制 |
 | --- | --- | ---: | --- |
 | 中國大陸 | Hanzi Writer Data 2.0.1 | 9,574 | 含繁簡字，傳統字形也依中國大陸筆順 |
-| 台灣官方（選用，未隨附） | 中華民國教育部「全筆順提示」PNG 原圖 | 6,063 | 自行安裝後啟用獨立練習模式；CC BY-NC-ND 3.0 TW，非商業、署名、禁止改作 |
+| 台灣官方（可選，未隨附） | 中華民國教育部「全筆順提示」PNG 原圖 | 6,063 | 自行安裝後啟用獨立練習模式；CC BY-NC-ND 3.0 TW，非商業、署名、禁止改作 |
 | 台灣社群（預設） | AnimCJK `graphicsZhHant.txt` | 1,013 | 可調色逐筆描紅，並非官方完整字庫 |
 | 香港教育局 | 《香港小學學習字詞表》正常 POST 查詢 | — | 另開教育局原頁；未打包香港筆畫資料 |
 
@@ -111,9 +111,9 @@ docker run --rm --init -p 3000:3000 --read-only kanlinji
 
 ### 台灣教育部模式與港台查詢
 
-未安裝教育部資料時，介面會停用「教育部原圖」範例及「台灣教育部・原版筆順＋練習格」模式，其餘練習方式與港台線上查詢照常使用。[安裝原圖](#選用安裝台灣教育部原圖)並重新啟動後，這兩個選項會自動啟用。每個字顯示完整原圖，旁邊有兩欄練習格；依紙張自動分頁，保留重複字及輸入順序。可調整格線、格子大小、紙張及頁頭。原圖的色彩、留白與長寬比例保持原樣，不能套用描紅／字體設定。建議直向列印；原始 PNG 解析度有限。
+未安裝教育部資料時，介面會停用「教育部原圖」範例及「台灣教育部・原版筆順＋練習格」模式，其餘練習方式與港台線上查詢照常使用。[安裝原圖](#可選安裝台灣教育部原圖)並重新啟動後，這兩個選項會自動啟用。每個字顯示完整原圖，旁邊有兩欄練習格；依紙張自動分頁，保留重複字及輸入順序。可調整格線、格子大小、紙張及頁頭。原圖的色彩、留白與長寬比例保持原樣，不能套用描紅／字體設定。建議直向列印；原始 PNG 解析度有限。
 
-**已核實的來源與條款：**教育部[版權說明](https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52)將「筆順動畫」「全筆順提示」以 CC BY-NC-ND 3.0 TW 釋出，並允許非商業 iframe 引用。選用匯入工具保留原圖 PNG 位元組；網站將其與練習格分開排列，每張印頁附教育部署名、網站及授權網址，不裁切、拆圖、改色或轉成自製筆畫。**授權解讀：**我們依 [CC 條款](https://creativecommons.org/licenses/by-nc-nd/3.0/tw/legalcode)關於完整作品彙編的規定處理；這不是教育部對本專案的個別認可，不能推論其他改作或商業用途亦獲授權。
+**已核實的來源與條款：**教育部[版權說明](https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52)將「筆順動畫」「全筆順提示」以 CC BY-NC-ND 3.0 TW 釋出，並允許非商業 iframe 引用。本專案的匯入工具保留原圖 PNG 位元組；網站將其與練習格分開排列，每張印頁附教育部署名、網站及授權網址，不裁切、拆圖、改色或轉成自製筆畫。**授權解讀：**我們依 [CC 條款](https://creativecommons.org/licenses/by-nc-nd/3.0/tw/legalcode)關於完整作品彙編的規定處理；這不是教育部對本專案的個別認可，不能推論其他改作或商業用途亦獲授權。
 
 下方「港台筆順來源查詢」可選取輸入中的任一漢字：台灣按鈕載入教育部 iframe；香港按鈕以教育局原本的 POST 表單開啟教育局原頁。只有點擊時才把選取的單字傳送至該網站。香港教育局的[使用要則](https://www.edbchinese.hk/lexlist_ch/fw_principle.html)把筆順定位為教學參考；這裡不宣稱它是唯一書寫方式，也沒有將其素材重新託管。
 
@@ -134,7 +134,7 @@ docker run --rm --init -p 3000:3000 --read-only kanlinji
 }
 ```
 
-`paths` 是依書寫順序排列的 SVG 封閉筆畫輪廓；座標空間為 1024 單位。若資料採向下 Y 軸，請依來源調整 transform。`DATA_DIR` 可指定含必需的 `cn.json.gz`、`tw.json.gz`，以及選用的 `moe.json.gz`、`hk.json.gz` 的其他目錄。重新建置映像可納入額外筆順字庫；教育部原圖須依下方步驟另行掛載，不得納入預設映像。請一併更新來源與授權聲明。
+`paths` 是依書寫順序排列的 SVG 封閉筆畫輪廓；座標空間為 1024 單位。若資料採向下 Y 軸，請依來源調整 transform。`DATA_DIR` 可指定含必需的 `cn.json.gz`、`tw.json.gz`，以及可選的 `moe.json.gz`、`hk.json.gz` 的其他目錄。重新建置映像可納入額外筆順字庫；教育部原圖須依下方步驟另行掛載，不得納入預設映像。請一併更新來源與授權聲明。
 
 內建社群字庫另包含 `_notice` 欄位，記錄來源、版本、授權及修改日期／方式；它不計入字數。重新分發資料時須保留此聲明及 `public/licenses/` 內的完整授權文件。
 
@@ -170,14 +170,14 @@ public/style.css          響應式介面與列印樣式
 public/fonts/             隨附字型
 public/licenses/          上游授權與修改聲明
 docs/                     網站畫面截圖
-data/                     內建筆順資料；選用的 moe.json.gz 受 Git 忽略
+data/                     內建筆順資料；可選的 moe.json.gz 受 Git 忽略
 test/                     Node.js 內建測試
 scripts/import-data.py    可重現的字庫轉換工具（維護時才需 Python）
 scripts/build-anim-font.py 從 AnimCJK 筆畫產生字體檔（維護時才需 Python 與 fonttools）
 scripts/import-moe.py     驗證並封裝教育部原始 PNG（不改動圖片）
 Dockerfile                測試與執行映像
 compose.yaml              一鍵啟動
-compose.moe.yaml          選用教育部原圖的唯讀掛載
+compose.moe.yaml          教育部原圖的可選唯讀掛載
 LICENSE                   多授權範圍說明
 LICENSE-MIT               原創程式碼與文件的 MIT 條文
 ```
@@ -186,11 +186,11 @@ LICENSE-MIT               原創程式碼與文件的 MIT 條文
 
 原始資料固定版本：
 
-- [Hanzi Writer Data 2.0.1](https://registry.npmjs.org/hanzi-writer-data/-/hanzi-writer-data-2.0.1.tgz)，其 [Make Me a Hanzi 上游](https://github.com/skishore/makemeahanzi) 指明中國大陸筆順。
-- [AnimCJK 台灣資料](https://raw.githubusercontent.com/parsimonhi/animCJK/ec5e17cca76c87587790bcbce5ea0b4d4fb753d6/graphicsZhHant.txt)。
-- [LXGW WenKai TC Regular](https://raw.githubusercontent.com/lxgw/LxgwWenKaiTC/55e77118285a064250abd0324da312223806368a/fonts/TTF/LXGWWenKaiTC-Regular.ttf)。
+- [Hanzi Writer Data 2.0.1](https://registry.npmjs.org/hanzi-writer-data/-/hanzi-writer-data-2.0.1.tgz)，其 [Make Me a Hanzi 上游](https://github.com/skishore/makemeahanzi) 指明中國大陸筆順
+- [AnimCJK 台灣資料](https://raw.githubusercontent.com/parsimonhi/animCJK/ec5e17cca76c87587790bcbce5ea0b4d4fb753d6/graphicsZhHant.txt)
+- [LXGW WenKai TC Regular](https://raw.githubusercontent.com/lxgw/LxgwWenKaiTC/55e77118285a064250abd0324da312223806368a/fonts/TTF/LXGWWenKaiTC-Regular.ttf)
 
-前兩項依序下載至 `/tmp/hanzi.tgz`、`/tmp/graphicsZhHant.txt`，再執行：
+`data/cn.json.gz`、`data/tw.json.gz` 和文楷字型已隨專案提供，平常執行網站或建置 Docker 映像都不需另行下載。只有需要重建筆順字庫時，才將前兩項來源檔依序存為 `/tmp/hanzi.tgz`、`/tmp/graphicsZhHant.txt`，再執行：
 
 ```sh
 python3 scripts/import-data.py /tmp/hanzi.tgz /tmp/graphicsZhHant.txt
@@ -200,7 +200,7 @@ python3 scripts/import-data.py /tmp/hanzi.tgz /tmp/graphicsZhHant.txt
 
 `public/fonts/AnimCJKWorksheet.otf` 由固定版本的台灣 AnimCJK 字庫產生，保留於專案作衍生資產，目前輸入欄不會載入它，避免字庫覆蓋不足時混排。需要重建時，在獨立 Python 環境安裝 `fonttools==4.60.1`，執行 `python scripts/build-anim-font.py`。字體屬 Arphic Public License 衍生資料；Docker 不需 Python。
 
-### 選用安裝台灣教育部原圖
+### 可選安裝台灣教育部原圖
 
 此資料**不在 Git 儲存庫或 Docker 映像內**。先閱讀教育部的[官方版權說明](https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52)：全筆順提示及筆順動畫採 [CC BY-NC-ND 3.0 TW](https://creativecommons.org/licenses/by-nc-nd/3.0/tw/legalcode)，使用須符合非商業、署名及禁止改作條件。
 
@@ -212,7 +212,7 @@ python3 scripts/import-moe.py /tmp/6063png.zip /tmp/iframe-index.csv
 
 工具固定核對兩個來源的 SHA-256，處理 ZIP 中混合的 Unicode／Big5 檔名，比對完整 6,063 字清單，再原封不動封裝 PNG。輸出 `data/moe.json.gz` 為 15,276,018 bytes，SHA-256：`5540626da99a8f307dd11d19e71c461400ba5e6386b9acfd951c2fd2866cad35`。更新上游版本時需重新檢查字數、來源及授權，再更新固定雜湊。來源雜湊及每圖版權說明見 [MOE-NOTICE](public/licenses/MOE-NOTICE.txt)。檔案已由 `.gitignore` 及 `.dockerignore` 排除。
 
-本機使用時重新啟動 `npm start`。Docker 使用以下選用設定，將本機檔案唯讀掛載到容器；預設 Docker 映像仍不包含原圖：
+本機使用時重新啟動 `npm start`。Docker 使用以下可選設定，將本機檔案唯讀掛載到容器；預設 Docker 映像仍不包含原圖：
 
 ```sh
 docker compose -f compose.yaml -f compose.moe.yaml up --build -d
