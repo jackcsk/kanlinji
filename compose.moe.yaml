@@ -1,0 +1,4 @@
+services:
+  kanlinji:
+    volumes:
+      - ./data/moe.json.gz:/app/data/moe.json.gz:ro

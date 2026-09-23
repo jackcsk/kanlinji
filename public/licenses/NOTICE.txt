@@ -1,0 +1,70 @@
+Third-party data and font notices
+================================
+
+1. Mainland stroke shapes: hanzi-writer-data 2.0.1, by David Chanin.
+   https://github.com/chanind/hanzi-writer-data
+   Derived from Make Me a Hanzi, by Shaunak Kishore and contributors:
+   https://github.com/skishore/makemeahanzi
+   Derived from Arphic PL KaitiM GB / Arphic PL UKai fonts.
+   Copyright (c) 1999 Arphic Technology Co., Ltd.
+   Graphics are distributed under the Arphic Public License (ARPHICPL.txt).
+
+2. Taiwan stroke shapes: AnimCJK, Copyright 2016-2026 FM&SH.
+   https://github.com/parsimonhi/animCJK
+   Commit ec5e17cca76c87587790bcbce5ea0b4d4fb753d6, graphicsZhHant.txt.
+   Distributed under the Arphic Public License (ARPHICPL.txt).
+   See AnimCJK-COPYING.txt for upstream attribution.
+
+Modification notice, 2026-09-22, kanlinji contributors:
+Stroke graphics above are repackaged as character-keyed, gzip-compressed JSON
+in data/cn.json.gz and data/tw.json.gz. The original stroke path geometry and
+order are retained unchanged. Medians are omitted. A coordinate transform
+is added. These derived graphics files remain under the Arphic Public License.
+scripts/import-data.py reproduces this transformation from pinned inputs.
+Each packaged dataset includes this provenance and modification information
+in a reserved _notice object, which is excluded from character counts.
+The two community stroke datasets above are not claimed to be certified by a
+regional education authority.
+
+3. Font: LXGW WenKai TC Regular, Copyright 2022-2026 The LXGW WenKai Project Authors.
+   https://github.com/lxgw/LxgwWenKaiTC
+   Commit 55e77118285a064250abd0324da312223806368a.
+   fonts/TTF/LXGWWenKaiTC-Regular.ttf is bundled unmodified under a local
+   filename, public/fonts/WorksheetKai.ttf. Internal font names are unchanged.
+   Licensed under the SIL Open Font License 1.1 (LXGW-OFL.txt).
+
+The named Pang Zhonghua and Tian Yingzhang fonts are NOT bundled. They are
+only available if installed by the user on the computer that prints the page.
+
+4. Taiwan official full stroke-order hint PNG images, 6,063 characters.
+   Copyright Ministry of Education, R.O.C. (Taiwan) / 中華民國教育部.
+   https://stroke-order.learningweb.moe.edu.tw/
+   CC BY-NC-ND 3.0 TW: attribution, noncommercial, no derivatives.
+   https://creativecommons.org/licenses/by-nc-nd/3.0/tw/
+   The optional, locally generated data/moe.json.gz contains Base64 of the
+   complete, unchanged original PNGs. It is not included in the repository
+   or default Docker image. These images retain their own license, separate
+   from the code, community stroke paths, and font. See MOE-NOTICE.txt for
+   exact provenance and terms.
+
+5. Font: AnimCJK Worksheet Regular, derived from the 1,013 Taiwan AnimCJK
+   glyphs in data/tw.json.gz, upstream commit
+   ec5e17cca76c87587790bcbce5ea0b4d4fb753d6, graphicsZhHant.txt.
+   https://github.com/parsimonhi/animCJK
+   Copyright (c) 1999 Arphic Technology Co., Ltd.
+   AnimCJK, Copyright 2016-2026 FM&SH.
+   public/fonts/AnimCJKWorksheet.otf remains under the Arphic Public License.
+   The full license and a modification notice are also embedded in the font.
+
+Modification notice, 2026-09-22, kanlinji contributors:
+Converted the bundled Taiwan stroke paths into an OpenType CFF font, retaining
+their Y-up coordinates and 1024-unit em. Independent stroke contours are
+oriented consistently so overlaps remain filled. Quadratic curves become
+equivalent cubic curves at CFF coordinate precision. No missing glyphs were
+added. This font is separate from the OFL-licensed LXGW font; a font stack
+may use LXGW as a fallback for characters absent from AnimCJK. The current
+input field uses the website's main UI font; printed stroke cells use the
+selected stroke dataset's paths where available.
+scripts/build-anim-font.py rebuilds this freely available derivative from the
+pinned data/tw.json.gz, using fonttools 4.60.1 as a build-only dependency.
+The runtime and Docker image do not require Python or fonttools.

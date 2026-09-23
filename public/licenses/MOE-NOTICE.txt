@@ -1,0 +1,49 @@
+台灣教育部全筆順提示原圖 / Taiwan MOE original full-stroke-hint images
+
+著作權及姓名標示：中華民國教育部《國字標準字體筆順學習網》
+Copyright and attribution: Ministry of Education, Republic of China (Taiwan),
+Learning Program for Stroke Order of Chinese Characters.
+https://stroke-order.learningweb.moe.edu.tw/
+
+These images are licensed under Creative Commons
+Attribution-NonCommercial-NoDerivs 3.0 Taiwan (CC BY-NC-ND 3.0 TW).
+License: https://creativecommons.org/licenses/by-nc-nd/3.0/tw/
+Legal terms: https://creativecommons.org/licenses/by-nc-nd/3.0/tw/legalcode
+MOE rights statement: https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52
+
+The MOE rights statement explicitly identifies its stroke-order animations and
+full-stroke hints as covered by this license. It requires attribution to
+中華民國教育部 and the website URL. The images are for noncommercial use;
+the license prohibits adaptations and requires the applicable attribution,
+license notices and license link to accompany distributed copies.
+
+When installed locally, this optional collection contains the complete,
+unchanged original full-stroke-hint PNG files. It is not included in the
+repository or default Docker image. Base64 encoding and gzip storage preserve
+their original bytes. It does not contain redrawn paths, cropped or rearranged
+image fragments, or the separately offered stroke-card downloads. Preserve
+each complete image when
+including it as a separate item in a worksheet collection. These images retain
+their own license independently of this application's source code and other
+worksheet content. This application is not endorsed by or affiliated with MOE.
+
+Official teaching resources:
+https://stroke-order.learningweb.moe.edu.tw/resource.jsp?ID=1
+Original image archive:
+https://stroke-order.learningweb.moe.edu.tw/download/6063png.zip
+Official coverage and iframe manifest:
+https://stroke-order.learningweb.moe.edu.tw/file/files/%E5%85%A8%E7%AD%86%E9%A0%86%E5%8B%95%E7%95%AB%E5%B5%8C%E5%85%A5%E7%A2%BC%E7%B6%B2%E5%9D%80%E5%88%97%E8%A1%A8.csv
+
+Retrieved: 2026-09-22
+Archive SHA-256:
+71ab4ab4f48c8503095819a88f0032b8408b1705afe89902196cc0be8d3fbfc3
+Manifest SHA-256:
+44036a65a3a95b6dec5a538ce1cd58098370cd0e309ca5e12a72f0ceaf32e986
+
+The archive contains 6,063 PNG images. Its exact character coverage, including
+the supplementary-plane character 𥑮 (U+2546E), matches the official manifest.
+The importer pins both source checksums and records a checksum for each PNG.
+Image sizes: 4,939 at 50 x 725; 1,123 at 95 x 725; 1 at 140 x 725 pixels.
+
+Rebuild command:
+python3 scripts/import-moe.py /path/to/6063png.zip /path/to/moe-iframe-index.csv

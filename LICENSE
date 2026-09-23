@@ -1,0 +1,46 @@
+License scope / 授權範圍
+========================
+
+This repository contains original application code and separately licensed
+third-party assets. No single license applies to the complete repository or
+Docker image. Redistribution must satisfy the terms for every included item.
+
+Original application source and project documentation (except the third-party
+material and screenshots listed below):
+  MIT License; copyright (c) 2026 Jack Cheung.
+  Full text: LICENSE-MIT
+
+Third-party assets:
+  data/cn.json.gz, data/tw.json.gz,
+  public/fonts/AnimCJKWorksheet.otf
+    Arphic Public License. See public/licenses/ARPHICPL.txt,
+    public/licenses/AnimCJK-COPYING.txt and public/licenses/NOTICE.txt.
+
+  public/fonts/WorksheetKai.ttf
+    SIL Open Font License 1.1. See public/licenses/LXGW-OFL.txt and
+    public/licenses/NOTICE.txt.
+
+Optional local asset, not included in this repository or default Docker image:
+  data/moe.json.gz (original full-stroke-hint PNG images, if installed)
+    Creative Commons BY-NC-ND 3.0 Taiwan. Noncommercial use only;
+    attribution is required and adaptations may not be distributed.
+    See public/licenses/MOE-NOTICE.txt and
+    https://stroke-order.learningweb.moe.edu.tw/page.jsp?ID=52
+
+  docs/screenshot-overview.jpg, docs/screenshot-strokes.jpg
+    Screenshots of this application containing AnimCJK stroke graphics.
+    The MIT license does not relicense the depicted third-party graphics.
+
+  public/licenses/ARPHICPL.txt, public/licenses/LXGW-OFL.txt,
+  public/licenses/AnimCJK-COPYING.txt
+    Upstream license texts and copyright notices, retained unaltered.
+
+  public/licenses/NOTICE.txt, public/licenses/MOE-NOTICE.txt
+    Project-authored source and attribution notices; their descriptions do
+    not change the licenses of the assets they identify.
+
+The Arphic and SIL OFL notices must accompany copies of the corresponding
+assets. If you distribute a locally installed Taiwan MOE image collection,
+its attribution and license notice must also accompany it.
+The MIT license for the original code does not grant permission to use the
+Taiwan MOE images commercially or to relicense any third-party asset.

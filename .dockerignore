@@ -1,0 +1,7 @@
+.git
+node_modules
+artifacts
+.DS_Store
+.env
+*.log
+data/moe.json.gz

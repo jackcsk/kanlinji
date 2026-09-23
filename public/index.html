@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="製作自己的中文練字紙。支援田字格、米字格、筆順與描紅，免費列印或儲存 PDF。">
+  <title>每日勤練字｜田字格字帖產生器</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="site-header no-print">
+    <a class="brand" href="/" aria-label="每日勤練字首頁"><span class="brand-mark" aria-hidden="true">字</span><span>每日勤練字<small>YOUR DAILY WRITING PRACTICE</small></span></a>
+    <a class="help-link" href="#guide">使用說明 <span aria-hidden="true">↗</span></a>
+  </header>
+  <main>
+    <section class="intro no-print">
+      <div><p class="eyebrow">一張字帖，一點進步</p><h1>一筆一畫，<span>慢慢寫好。</span></h1><p class="intro-copy">把想練的字，變成專屬練習紙。選好格線與樣式，就能開始。</p></div>
+      <div class="intro-note"><span>田</span><span>字</span><span>格</span><small>今天，也好好寫字。</small></div>
+    </section>
+    <div class="workspace">
+      <aside class="settings no-print" aria-label="字帖設定">
+        <form id="worksheet-form">
+          <section class="setting-section">
+            <div class="section-title"><h2><span>01</span> 想練些甚麼？</h2><button class="text-button" type="button" id="clear">清空</button></div>
+            <label class="sr-only" for="text">練習文字</label>
+            <textarea id="text" name="text" rows="4" placeholder="輸入漢字、詞語或文章；留空可產生空白練習紙。">天地玄黃宇宙洪荒</textarea>
+            <div class="input-meta"><span>繁體、簡體皆可</span><span id="character-count">8 / 1000</span></div>
+            <div class="examples"><span>試試看</span><button type="button" data-example="animcjk">AnimCJK 筆順</button><button type="button" data-example="chars">基礎漢字</button><button type="button" data-example="poem">唐詩</button><button type="button" data-example="words">詞語</button><button type="button" data-example="official" disabled title="台灣教育部原圖需另行安裝，詳見 README。">教育部原圖</button></div>
+            <label for="mode">練習方式</label><select id="mode" name="mode"></select>
+            <p class="field-hint" id="mode-help"></p>
+            <p class="field-hint" id="official-availability" hidden>教育部原圖資料未安裝。需要原圖字帖時，請參閱<a href="/about.html#moe">選用安裝與授權說明</a>；線上動畫查詢仍可使用。</p>
+            <p class="field-hint official-source" id="official-source" hidden>中華民國教育部・<span id="official-count">—</span> 字<br>CC BY-NC-ND 3.0 TW・非商業使用<br><a href="/about.html#moe">資料來源與授權 ↗</a></p>
+          </section>
+          <section class="setting-section">
+            <h2><span>02</span> 選一張練習紙</h2>
+            <fieldset><legend>格線樣式</legend><div id="grid-options" class="grid-options"></div></fieldset>
+            <div class="two-fields"><div><label for="paper">紙張</label><select name="paper" id="paper"><option>A4</option><option>Letter</option></select></div><div><label for="orientation">方向</label><select id="orientation" name="orientation"><option value="portrait">直向</option><option value="landscape">橫向</option></select></div></div>
+            <label class="range-label" for="cellSize">格子大小 <output id="size-output">15 mm</output></label><input type="range" name="cellSize" id="cellSize" min="12" max="28" step="1" value="15">
+            <div class="two-fields"><div><label for="gridColor">格線顏色</label><div class="color-field"><input type="color" id="gridColor" name="gridColor" value="#769b87"><span>自選色彩</span></div></div><div><label for="textColor">文字顏色</label><div class="color-field"><input type="color" id="textColor" name="textColor" value="#303b35"><span>自選色彩</span></div></div></div>
+            <div class="palette" aria-label="配色預設"><button type="button" data-palette="green">綠色</button><button type="button" data-palette="black">黑色</button><button type="button" data-palette="red">紅色</button><button type="button" data-palette="textbook">教材風</button></div>
+          </section>
+          <section class="setting-section">
+            <h2><span>03</span> 字體與描紅</h2>
+            <label for="font">字體</label><select id="font" name="font"><option value="kai">筆順字庫字形（缺字用文楷）</option><option value="sans">系統黑體</option><option value="pang">龐中華楷體（需安裝）</option><option value="tian">田英章楷書（需安裝）</option><option value="custom">自訂字體</option></select>
+            <div id="custom-font-field" hidden><label for="customFont">電腦已安裝的字體名稱</label><input name="customFont" id="customFont" type="text" maxlength="40" placeholder="例如：標楷體"><p class="field-hint">未安裝的字體會使用內建文楷。</p></div>
+            <label for="trace">描紅樣式</label><select id="trace" name="trace"><option value="darkest">非常深</option><option value="dark">深</option><option value="deep">較深</option><option value="light">略淺</option><option value="medium" selected>適中</option><option value="faint">非常淺</option><option value="invisible">白色（不可見）</option><option value="outline">空心</option><option value="shadow">立體感</option></select>
+            <div id="stroke-settings" hidden><label for="standard">字形與筆順來源</label><select name="standard" id="standard"><option value="tw" selected>繁體・AnimCJK（台灣）</option><option value="cn">中國大陸・Hanzi Writer</option><option value="hk" disabled>香港・尚未匯入字庫</option></select><p class="field-hint" id="data-coverage">正在讀取字庫資訊…</p><p class="field-hint" id="stroke-font-help"></p><label class="check" id="fallback-option"><input type="checkbox" name="fallbackCn" checked> AnimCJK 缺字時，以中國大陸字形及筆順補上</label><label class="check" id="stroke-fill-option"><input type="checkbox" name="strokeFill" checked> 筆順後的餘格填入描紅</label></div>
+          </section>
+          <details class="setting-section advanced"><summary>頁頭與進階設定 <span aria-hidden="true">＋</span></summary>
+            <label for="title">字帖標題</label><input id="title" name="title" value="每日勤練字" maxlength="40">
+            <label for="infoType">資訊欄</label><select id="infoType" name="infoType"><option value="fields">自訂欄位</option><option value="motto">每頁座右銘</option><option value="custom">自訂文案</option><option value="none">不顯示</option></select>
+            <div id="info-text-field"><label id="info-label" for="infoText">欄位名稱（以頓號或逗號分隔）</label><input id="infoText" name="infoText" value="姓名、日期" maxlength="80"></div>
+            <label class="check"><input name="fillLast" type="checkbox" checked> 尾頁填滿空白格</label>
+            <label class="check"><input name="reverse" type="checkbox"> 每行由右向左排列</label>
+          </details>
+          <div class="form-actions"><button class="primary-button" id="generate" type="submit">產生字帖 <span aria-hidden="true">↗</span></button><button class="text-button" id="reset-settings" type="button">重設</button><p>設定會即時更新預覽</p></div>
+        </form>
+      </aside>
+      <section class="preview-area" aria-label="字帖預覽">
+        <div class="preview-toolbar no-print"><div><span class="live-dot"></span><strong>字帖預覽</strong><span id="paper-summary">A4 · 直向</span></div><button class="print-button" id="print" type="button"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9V3h12v6M6 17H3V9h18v8h-3M6 14h12v7H6z"/></svg> 列印 / 儲存 PDF</button></div>
+        <div class="preview-status no-print" id="status" role="status" aria-live="polite">正在準備字帖…</div>
+        <div class="warning no-print" id="warning" role="alert" hidden></div>
+        <div class="paper-desk"><div id="pages"></div></div>
+        <nav class="page-navigation no-print" aria-label="預覽頁碼"><button type="button" id="previous" aria-label="上一頁">←</button><span id="page-counter">第 1 / 1 頁</span><button type="button" id="next" aria-label="下一頁">→</button></nav>
+        <p class="print-note no-print">按紙張比例預覽 · 列印時選擇 100% 比例並關閉瀏覽器頁首頁尾</p>
+      </section>
+    </div>
+    <section class="official-references no-print" id="official-references" hidden aria-labelledby="reference-heading">
+      <div><p class="eyebrow">對照當地筆順</p><h2 id="reference-heading">港台筆順來源查詢</h2><p>選一個字，查看來源網站的示範。點擊後會連線至該網站。</p></div>
+      <div class="reference-controls"><label for="reference-character">查詢的字</label><select id="reference-character"></select><button type="button" id="load-tw-viewer">台灣教育部動畫</button>
+        <form action="https://www.edbchinese.hk/lexlist_ch/result.jsp" method="post" target="_blank" rel="noopener noreferrer" accept-charset="UTF-8">
+          <input type="hidden" name="searchMethod" value="direct"><input type="hidden" name="searchCriteria" id="hk-character"><input type="hidden" name="sortBy" value="stroke"><input type="hidden" name="jpC" value="lshk">
+          <button type="submit">香港教育局參考筆順 ↗</button>
+        </form>
+      </div><p class="field-hint" id="reference-status" role="status" aria-live="polite"></p><div id="official-viewer"></div>
+    </section>
+    <section class="guide no-print" id="guide"><div><p class="eyebrow">從這裡開始</p><h2>三步，準備好今天的練習。</h2></div><ol><li><strong>輸入練習內容</strong><p>單字直接輸入；詞語用「|」分隔。留空可印空白格紙。</p></li><li><strong>調整你的字帖</strong><p>選格線、描紅深淺與字體。筆順模式會依序顯示每一筆。</p></li><li><strong>印出來，開始寫</strong><p>點擊列印，或在目的地選擇「另存為 PDF」。列印會包含所有頁。</p></li></ol></section>
+  </main>
+  <footer class="no-print"><span>每日勤練字 · 給每一天，一點專注。</span><a href="/about.html">字庫來源與授權</a></footer>
+  <noscript>請開啟 JavaScript 以產生字帖。</noscript>
+</body>
+</html>

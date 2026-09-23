@@ -1,0 +1,14 @@
+{
+  "name": "kanlinji",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "可離線部署的中文田字格與筆順字帖產生器",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test",
+    "check": "node --check server.js && node --check public/app.js && node --check public/worksheet.js"
+  }
+}
